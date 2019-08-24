@@ -50,12 +50,9 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- 配置dbcp数据库连接池 -->
-
-    <!-- <context:property-placeholder location="classpath:db.properties"/> -->
+    <!-- 配置druid数据库连接池 -->
     <!--数据库配置 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
-
     <!-- 数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
@@ -125,14 +122,14 @@
         <!-- 配置一个切入点 -->
         <aop:pointcut id="serviceMethods" expression="execution(* com.springmvc.service.Impl.*ServiceImpl.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
-<!--        <aop:aspect ref="theLogger">-->
-<!--            &lt;!&ndash; 将before()方法定义为前置增强,并引用pointcut切入点 &ndash;&gt;-->
-<!--            <aop:before method="before" pointcut-ref="serviceMethods"/>-->
-<!--            &lt;!&ndash; 将afterReturning()方法定义为后置增强,并引用pointcut切入点 &ndash;&gt;-->
-<!--            &lt;!&ndash; 通过returning属性定义名为result的参数注入返回值 &ndash;&gt;-->
-<!--            <aop:after-returning method="afterReturning"-->
-<!--                                 pointcut-ref="serviceMethods" returning="result"/>-->
-<!--        </aop:aspect>-->
+        <!--        <aop:aspect ref="theLogger">-->
+        <!--            &lt;!&ndash; 将before()方法定义为前置增强,并引用pointcut切入点 &ndash;&gt;-->
+        <!--            <aop:before method="before" pointcut-ref="serviceMethods"/>-->
+        <!--            &lt;!&ndash; 将afterReturning()方法定义为后置增强,并引用pointcut切入点 &ndash;&gt;-->
+        <!--            &lt;!&ndash; 通过returning属性定义名为result的参数注入返回值 &ndash;&gt;-->
+        <!--            <aop:after-returning method="afterReturning"-->
+        <!--                                 pointcut-ref="serviceMethods" returning="result"/>-->
+        <!--        </aop:aspect>-->
     </aop:config>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
