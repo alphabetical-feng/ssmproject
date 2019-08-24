@@ -121,8 +121,6 @@
         </tx:attributes>
     </tx:advice>
 
-    <bean id="theLogger" class="com.springmvc.aop.LoggerAop"></bean>
-
     <aop:config>
         <!-- 配置一个切入点 -->
         <aop:pointcut id="serviceMethods" expression="execution(* com.springmvc.service.Impl.*ServiceImpl.*(..))"/>

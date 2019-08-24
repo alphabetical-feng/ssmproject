@@ -8,7 +8,10 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
@@ -35,6 +38,10 @@ public class LoggerAop {
      */
     @Before("pointCut()")
     public void before(JoinPoint jp) { // JoinPoint 连接点对象
+        //获取前台参数
+        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        log.info(req.getParameter("pageNo"));
+        log.info(req.getParameter("pageSize"));
         log.info("调用" + jp.getTarget() + "的" + jp.getSignature().getName()
                 + "方法，方法入参：" + Arrays.toString(jp.getArgs())); // jp.getArgs()连接点方法参数数组
     }
