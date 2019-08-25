@@ -15,15 +15,7 @@
     <context:component-scan base-package="com.springmvc"/>
     <mvc:annotation-driven/>
     <aop:aspectj-autoproxy/>
-    <!-- 静态资源访问 -->
-    <!--如果webapp下你新建了文件夹，想访问里面的静态资源，那么就要在这配置一下-->
-    <!--<mvc:resources location="/images/" mapping="/images/**"/>-->
-    <!--<mvc:resources location="/css/" mapping="/css/**"/>-->
-    <!--<mvc:resources location="/styles/" mapping="/styles/**"/>-->
-    <!--<mvc:resources location="/js/" mapping="/js/**"/>-->
 
-    <!-- Configures the @Controller programming model
-    <mvc:annotation-driven />-->
     <!-- ②：启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
@@ -52,7 +44,7 @@
 
     <!-- 配置druid数据库连接池 -->
     <!--数据库配置 -->
-    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <context:property-placeholder location="classpath:*.properties"/>
     <!-- 数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
@@ -80,7 +72,7 @@
             </list>
         </property>
     </bean>
-
+    <import resource="classpath:redis.xml"/>
     <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
         <property name="slowSqlMillis" value="1000"/>
         <property name="logSlowSql" value="true"/>
