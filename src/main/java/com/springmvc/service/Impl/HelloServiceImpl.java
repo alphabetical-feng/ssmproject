@@ -26,6 +26,15 @@ public class HelloServiceImpl implements HelloService {
     }
 
     public int insert(Hello record) {
-        return mapper.insert(record);
+//        int i = mapper.updateByPrimaryKeySelective(record);
+//        System.out.println(i);
+//        if (i==0)
+//            throw new RuntimeException();
+//        record.setId(1290L);
+        int i = mapper.insert(record);
+        System.out.println("insert" + i);
+        return i;
     }
+
+
 }

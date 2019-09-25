@@ -31,6 +31,7 @@ public class LoggerAop {
     public void pointCut() {
     }
 
+
     /**
      * 前置通知
      *
@@ -47,7 +48,7 @@ public class LoggerAop {
     }
 
     /**
-     * 前置通知
+     * 后置通知
      *
      * @param jp
      * @param result

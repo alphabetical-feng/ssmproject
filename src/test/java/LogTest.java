@@ -14,7 +14,7 @@ public class LogTest {
 
     @Test
     public void printLog() {
-        logger.info("info");
+        logger.info("info[{}]","123");
         logger.debug("debug");
         logger.warn("warn");
         logger.error("error");
