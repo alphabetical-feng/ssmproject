@@ -3,13 +3,13 @@ package com.springmvc.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.springmvc.entity.Hello;
+import com.springmvc.exception.CustomException;
 import com.springmvc.service.HelloService;
 import com.springmvc.utils.BeanUtil;
 import com.springmvc.utils.JsonUtil;
 import com.springmvc.utils.PagedResult;
 import com.springmvc.utils.RedisUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +25,10 @@ import java.util.concurrent.TimeUnit;
  * @modified By：
  */
 @RestController
+@Slf4j
 @RequestMapping("/test")
 public class TestController {
 
-    private Logger log = LoggerFactory.getLogger(TestController.class);
 
     @Autowired
     private HelloService helloService;
@@ -72,6 +72,16 @@ public class TestController {
             helloService.insert(s);
         }
         return 1;
+    }
+
+    @RequestMapping("/test3")
+    public String test3(Integer num) {
+        // TODO 演示需要，实际上参数是否为空通过 @RequestParam(required = true)  就可以控制
+        if (num == null) {
+            throw new CustomException(400, "num不能为空");
+        }
+        int i = 10 / num;
+        return "result:" + i;
     }
 
 

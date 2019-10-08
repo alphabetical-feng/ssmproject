@@ -1,12 +1,11 @@
 package com.springmvc.aop;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -22,15 +21,14 @@ import java.util.Arrays;
  */
 @Component
 @Aspect
+@Slf4j
 public class LoggerAop {
 
-    private static final Logger log = LoggerFactory.getLogger(LoggerAop.class);
 
     //定义切点
     @Pointcut("execution(* com.springmvc.service.Impl.*ServiceImpl.*(..))")
     public void pointCut() {
     }
-
 
     /**
      * 前置通知
