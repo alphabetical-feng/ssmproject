@@ -32,7 +32,6 @@ public class HelloServiceImpl implements HelloService {
 //            throw new RuntimeException();
 //        record.setId(1290L);
         int i = mapper.insert(record);
-        System.out.println("insert" + i);
         return i;
     }
 

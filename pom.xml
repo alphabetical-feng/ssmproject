@@ -268,6 +268,14 @@
             <artifactId>spring-data-redis</artifactId>
             <version>1.6.2.RELEASE</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.11</version>
+            <type>pom</type>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>helloworld</finalName>
