@@ -1,6 +1,7 @@
 package com.springmvc.exception;
 
 import com.springmvc.pojo.ErrorResponseEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 全局异常处理
  */
-@ControllerAdvice
+@ControllerAdvice()
 @ResponseBody
+@Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 
@@ -35,7 +37,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ErrorResponseEntity customExceptionHandler(HttpServletRequest request, final Exception e, HttpServletResponse response) {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         CustomException exception = (CustomException) e;
-        return new ErrorResponseEntity(exception.getCode(), exception.getMessage());
+        log.error("请求异常：{}", exception.getMessage());
+        return new ErrorResponseEntity(exception.getCode(), "请求异常");
     }
 
     /**
@@ -52,7 +55,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ErrorResponseEntity runtimeExceptionHandler(HttpServletRequest request, final Exception e, HttpServletResponse response) {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         RuntimeException exception = (RuntimeException) e;
-        return new ErrorResponseEntity(400, exception.getMessage());
+        log.error("请求异常：{}", exception.getMessage());
+        return new ErrorResponseEntity(500, "请求异常");
     }
 
     /**

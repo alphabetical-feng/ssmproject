@@ -42,20 +42,16 @@ public class TestController {
         int pageP = StringUtils.isEmpty(pageSize) ? 20 : Integer.parseInt(pageSize);
         PageHelper.startPage(pageN, pageP);//关键步骤
         PageInfo<Hello> page = null;
-        try {
-            List<Hello> select = helloService.select(hello);
-            String p = redisUtil.get("hello-list");
-            log.info("缓存中数据为：" + p);
-            if (p == null) {
-                redisUtil.set("hello-list", JsonUtil.objectToJson(select));
-                redisUtil.expire("hello-list", 30, TimeUnit.SECONDS);
-                log.info("放入缓存成功...");
-            }
-            page = new PageInfo<Hello>(select);
-            log.info("哈哈");
-        } catch (Exception e) {
-            log.info(e + "");
+        List<Hello> select = helloService.select(hello);
+        String p = redisUtil.get("hello-list");
+        log.info("缓存中数据为：" + p);
+        if (p == null) {
+            redisUtil.set("hello-list", JsonUtil.objectToJson(select));
+            redisUtil.expire("hello-list", 30, TimeUnit.SECONDS);
+            log.info("放入缓存成功...");
         }
+        page = new PageInfo<Hello>(select);
+        log.info("哈哈");
         return BeanUtil.toPagedResult(page);
     }
 

@@ -21,13 +21,11 @@ public class HelloServiceImpl implements HelloService {
     private HelloMapper mapper;
 
     public List<Hello> select(Hello hello) {
-        List<Hello> helloList = mapper.select(hello);
-        return helloList;
+        return mapper.select(hello);
     }
 
     public int insert(Hello record) {
-        int i = mapper.insert(record);
-        return i;
+        return mapper.insert(record);
     }
 
 
