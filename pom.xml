@@ -12,12 +12,12 @@
 
     <properties>
         <!-- spring版本号 -->
-        <spring.version>4.2.5.RELEASE</spring.version>
+        <spring.version>5.1.5.RELEASE</spring.version>
         <!-- mybatis版本号 -->
-        <mybatis.version>3.4.0</mybatis.version>
-        <!-- log4j日志文件管理包版本 -->
-        <slf4j.version>1.6.6</slf4j.version>
-        <log4j.version>1.2.12</log4j.version>
+        <mybatis.version>3.4.6</mybatis.version>
+<!--        &lt;!&ndash; log4j日志文件管理包版本 &ndash;&gt;-->
+<!--        <slf4j.version>1.6.6</slf4j.version>-->
+<!--        <log4j.version>1.2.12</log4j.version>-->
     </properties>
     <dependencies>
         <!-- spring核心包 -->
@@ -128,21 +128,21 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
-        <!-- json数据 -->
+        <!-- json数据 spring5要使用jackson 2.9.X的版本，低于会报错版本不匹配-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.7.1</version>
+            <version>2.9.8</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.7.1</version>
+            <version>2.9.8</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.7.1</version>
+            <version>2.9.8</version>
         </dependency>
         <dependency>
             <groupId>net.sf.json-lib</groupId>
@@ -224,20 +224,26 @@
         </dependency>
         <!-- 日志文件管理包 -->
         <!-- log start -->
+<!--        <dependency>-->
+<!--            <groupId>log4j</groupId>-->
+<!--            <artifactId>log4j</artifactId>-->
+<!--            <version>${log4j.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-api</artifactId>-->
+<!--            <version>${slf4j.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-log4j12</artifactId>-->
+<!--            <version>${slf4j.version}</version>-->
+<!--        </dependency>-->
+        <!--这个依赖直接包含了 logback-core 以及 slf4j-api的依赖-->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
         </dependency>
         <!--上传-->
         <dependency>

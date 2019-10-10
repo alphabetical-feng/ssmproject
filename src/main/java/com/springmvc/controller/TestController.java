@@ -21,14 +21,13 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author ：qmf
  * @date ：Created in 2019/8/24 10:26
- * @description：
+ * @description：测试
  * @modified By：
  */
 @RestController
 @Slf4j
 @RequestMapping("/test")
 public class TestController {
-
 
     @Autowired
     private HelloService helloService;
@@ -40,11 +39,15 @@ public class TestController {
         Hello hello = new Hello();
         int pageN = StringUtils.isEmpty(pageNo) ? 1 : Integer.parseInt(pageNo);
         int pageP = StringUtils.isEmpty(pageSize) ? 20 : Integer.parseInt(pageSize);
-        PageHelper.startPage(pageN, pageP);//关键步骤
+        PageHelper.startPage(pageN, pageP, "id desc");//关键步骤
         PageInfo<Hello> page = null;
         List<Hello> select = helloService.select(hello);
         String p = redisUtil.get("hello-list");
         log.info("缓存中数据为：" + p);
+        log.debug("DEBUG");
+        log.info("info");
+        log.warn("warn");
+        log.error("error");
         if (p == null) {
             redisUtil.set("hello-list", JsonUtil.objectToJson(select));
             redisUtil.expire("hello-list", 30, TimeUnit.SECONDS);

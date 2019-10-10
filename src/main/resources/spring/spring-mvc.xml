@@ -24,14 +24,14 @@
 
     <!-- Configures the @Controller programming model
     <mvc:annotation-driven />-->
-    <!-- ②：启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="mappingJacksonHttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>
+    <!-- ②：启动Spring MVC的注解功能，完成请求和注解POJO的映射 spring5后不用-->
+<!--    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
+<!--        <property name="messageConverters">-->
+<!--            <list>-->
+<!--                <ref bean="mappingJacksonHttpMessageConverter"/>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
 
     <bean id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">

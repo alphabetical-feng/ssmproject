@@ -64,6 +64,6 @@
   <!--</error-page>-->
   <!--设置session失效时间为30分钟 -->
   <session-config>
-    <session-timeout>600</session-timeout>
+    <session-timeout>1800</session-timeout>
   </session-config>
 </web-app>

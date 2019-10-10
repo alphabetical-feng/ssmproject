@@ -1,14 +1,14 @@
 package com.springmvc.exception;
 
 import com.springmvc.pojo.ErrorResponseEntity;
+import com.springmvc.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -19,8 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 全局异常处理
  */
-@ControllerAdvice()
-@ResponseBody
+@RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -37,6 +36,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ErrorResponseEntity customExceptionHandler(HttpServletRequest request, final Exception e, HttpServletResponse response) {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         CustomException exception = (CustomException) e;
+        log.error("方法入参为：{}", JsonUtil.objectToJson(request.getParameterMap()));
+        log.error("请求[{}]异常：{}", request.getRequestURI(), exception.getMessage());
         log.error("请求异常：{}", exception.getMessage());
         return new ErrorResponseEntity(exception.getCode(), "请求异常");
     }
@@ -55,7 +56,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ErrorResponseEntity runtimeExceptionHandler(HttpServletRequest request, final Exception e, HttpServletResponse response) {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         RuntimeException exception = (RuntimeException) e;
-        log.error("请求异常：{}", exception.getMessage());
+        log.error("方法入参为：{}", JsonUtil.objectToJson(request.getParameterMap()));
+        log.error("请求[{}]异常：{}", request.getRequestURI(), exception.getMessage());
         return new ErrorResponseEntity(500, "请求异常");
     }
 
