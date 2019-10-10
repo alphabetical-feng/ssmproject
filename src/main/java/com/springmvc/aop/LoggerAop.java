@@ -1,17 +1,15 @@
 package com.springmvc.aop;
 
+import com.springmvc.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 
 /**
  * @author ：qmf
@@ -30,6 +28,11 @@ public class LoggerAop {
     public void pointCut() {
     }
 
+    //所有controller切点
+    @Pointcut("execution(* com.springmvc.controller..*(..))")
+    public void controllerCut() {
+    }
+
     /**
      * 前置通知
      *
@@ -38,11 +41,11 @@ public class LoggerAop {
     @Before("pointCut()")
     public void before(JoinPoint jp) { // JoinPoint 连接点对象
         //获取前台参数
-        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        log.info(req.getParameter("pageNo"));
-        log.info(req.getParameter("pageSize"));
-        log.info("调用" + jp.getTarget() + "的" + jp.getSignature().getName()
-                + "方法，方法入参：" + Arrays.toString(jp.getArgs())); // jp.getArgs()连接点方法参数数组
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        log.info("来访ip为: {}：{}", request.getRemoteAddr(), request.getLocalPort());
+        log.info("调用{}的{}方法, 方法入参为：{}", request.getRequestURI(), jp.getSignature().getName(), JsonUtil.objectToJson(request.getParameterMap()));
+//        log.info("调用" + jp.getTarget() + "的" + jp.getSignature().getName()
+//                + "方法，方法入参：" + Arrays.toString(jp.getArgs())); // jp.getArgs()连接点方法参数数组
     }
 
     /**
@@ -55,6 +58,23 @@ public class LoggerAop {
     public void afterReturning(JoinPoint jp, Object result) {
         // 连接点所在目标类
         log.info("调用" + jp.getTarget() + "的" + jp.getSignature().getName() // 连接点方法信息
-                + "方法，返回值" + result);
+                + "方法，返回值" + JsonUtil.objectToJson(result));
     }
+
+    /**
+     * 环绕通知
+     *
+     * @param thisJoinPoint
+     * @return
+     * @throws Throwable
+     */
+    @Around("controllerCut()")
+    public Object around(ProceedingJoinPoint thisJoinPoint) throws Throwable {
+        long startTime = System.currentTimeMillis();
+        Object result = thisJoinPoint.proceed();
+        long time = System.currentTimeMillis() - startTime;
+        log.info("耗时{} ms", time);
+        return result;
+    }
+
 }

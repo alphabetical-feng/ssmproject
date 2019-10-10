@@ -44,10 +44,6 @@ public class TestController {
         List<Hello> select = helloService.select(hello);
         String p = redisUtil.get("hello-list");
         log.info("缓存中数据为：" + p);
-        log.debug("DEBUG");
-        log.info("info");
-        log.warn("warn");
-        log.error("error");
         if (p == null) {
             redisUtil.set("hello-list", JsonUtil.objectToJson(select));
             redisUtil.expire("hello-list", 30, TimeUnit.SECONDS);
