@@ -6,7 +6,8 @@
          http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!--    扫描所有包-->
     <context:component-scan base-package="com.springmvc"/>
-
+    <!--    加载所有配置文件-->
+    <context:property-placeholder location="classpath:*.properties"/>
     <import resource="spring-jdbc.xml"/>
     <import resource="spring-aop.xml"/>
     <import resource="classpath:redis.xml"/>

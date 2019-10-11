@@ -10,7 +10,7 @@
 
     <!-- 配置druid数据库连接池 -->
     <!--数据库配置 -->
-    <context:property-placeholder location="classpath:*.properties"/>
+
     <!-- 数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
