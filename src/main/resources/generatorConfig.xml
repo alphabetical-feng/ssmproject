@@ -6,30 +6,39 @@
     <properties resource="generator.properties"/>
 
     <classPathEntry
-            location="J:\maven_res\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar" />
+            location="J:\maven_res\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar"/>
     <context id="context1">
+        <!--开启序列化实体实体类 -->
+        <!--        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>-->
+        <!--实体类toString方法 -->
+        <!--        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />-->
         <!-- 注释 -->
-        <commentGenerator>
-            <property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
-            <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳 -->
+        <!--        <commentGenerator>-->
+        <!--            <property name="suppressAllComments" value="false"/>&lt;!&ndash; 是否取消注释 &ndash;&gt;-->
+        <!--            <property name="suppressDate" value="true"/> &lt;!&ndash; 是否生成注释代时间戳 &ndash;&gt;-->
+        <!--        </commentGenerator>-->
+        <!-- 通过type指定自定义的注释 -->
+        <commentGenerator type="com.springmvc.utils.MyCommentGenerator">
+            <!-- 不要开启，否则将不会使用自定义注释 -->
+            <!-- <property name="suppressAllComments" value="true"> -->
         </commentGenerator>
 
         <jdbcConnection driverClass="${driver}"
                         connectionURL="${url}"
                         userId="${username}"
-                        password="${password}" />
+                        password="${password}"/>
 
         <!-- 类型转换 -->
         <javaTypeResolver>
             <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
-            <property name="forceBigDecimals" value="false" />
+            <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
         <javaModelGenerator targetPackage="${modelPackage}"
-                            targetProject="${modelProject}" />
-        <sqlMapGenerator targetPackage="${sqlPackage}" targetProject="${sqlProject}" />
+                            targetProject="${modelProject}"/>
+        <sqlMapGenerator targetPackage="${sqlPackage}" targetProject="${sqlProject}"/>
         <javaClientGenerator targetPackage="${mapperPackage}"
-                             targetProject="${mapperProject}" type="XMLMAPPER" />
+                             targetProject="${mapperProject}" type="XMLMAPPER"/>
 
         <!-- 如果需要通配所有表 直接用sql的通配符    %即可 -->
         <table schema="" tableName="${table}" enableCountByExample="false"
