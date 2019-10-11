@@ -1,4 +1,4 @@
-package com.springmvc.utils;
+package com.springmvc.utils.filterAndInterceptor;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

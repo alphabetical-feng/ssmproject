@@ -53,7 +53,7 @@
     <!-- 跨域 -->
     <filter>
         <filter-name>contextfilter</filter-name>
-        <filter-class>com.springmvc.utils.WebContextFilter</filter-class>
+        <filter-class>com.springmvc.utils.filterAndInterceptor.WebContextFilter</filter-class>
         <init-param>
             <param-name>IsCross</param-name>
             <param-value>true</param-value>

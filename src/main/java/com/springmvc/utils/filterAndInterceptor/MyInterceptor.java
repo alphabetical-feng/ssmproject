@@ -1,4 +1,4 @@
-package com.springmvc.utils;
+package com.springmvc.utils.filterAndInterceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;

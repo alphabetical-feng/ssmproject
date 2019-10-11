@@ -17,6 +17,7 @@ import java.util.Set;
 
 import static org.mybatis.generator.internal.util.StringUtility.isTrue;
 
+
 /**
  * 生成实体类注释
  */
