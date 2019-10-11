@@ -18,7 +18,7 @@
         <!--            <property name="suppressDate" value="true"/> &lt;!&ndash; 是否生成注释代时间戳 &ndash;&gt;-->
         <!--        </commentGenerator>-->
         <!-- 通过type指定自定义的注释 -->
-        <commentGenerator type="com.springmvc.utils.MyCommentGenerator">
+        <commentGenerator type="com.springmvc.utils.mybatisGenerator.MyCommentGenerator">
             <!-- 不要开启，否则将不会使用自定义注释 -->
             <!-- <property name="suppressAllComments" value="true"> -->
         </commentGenerator>

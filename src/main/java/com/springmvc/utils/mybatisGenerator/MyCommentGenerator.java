@@ -1,4 +1,4 @@
-package com.springmvc.utils;
+package com.springmvc.utils.mybatisGenerator;
 
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;
