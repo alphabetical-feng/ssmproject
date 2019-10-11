@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+    <!--1.开启定时任务注解,所在类必须添加@Service,否则不生效-->
+<!--    <task:annotation-driven/>-->
+    <!--    2.使用xml配置-->
+    <!--        <bean id="taskJob" class="com.springmvc.schedulerTask.TestTask"/>-->
+    <!--        &lt;!&ndash; 指定bean的方法 &ndash;&gt;-->
+    <!--        <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" autowire="no">-->
+    <!--            <property name="targetObject" ref="taskJob"/>-->
+    <!--            <property name="targetMethod" value="quartz"/>-->
+    <!--            <property name="concurrent" value="true"/>-->
+    <!--        </bean>-->
+
+    <!--        &lt;!&ndash; 启动时执行一次 &ndash;&gt;-->
+    <!--    &lt;!&ndash;    <bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">&ndash;&gt;-->
+    <!--    &lt;!&ndash;        <property name="jobDetail" ref="jobDetail"/>&ndash;&gt;-->
+    <!--    &lt;!&ndash;        &lt;!&ndash; 延迟3秒执行 &ndash;&gt;&ndash;&gt;-->
+    <!--    &lt;!&ndash;        <property name="startDelay" value="3"/>&ndash;&gt;-->
+    <!--    &lt;!&ndash;        &lt;!&ndash; 执行周期5秒-repeatCount为0时不生效 &ndash;&gt;&ndash;&gt;-->
+    <!--    &lt;!&ndash;        <property name="repeatInterval" value="5000"/>&ndash;&gt;-->
+    <!--    &lt;!&ndash;        &lt;!&ndash; 执行1次 &ndash;&gt;&ndash;&gt;-->
+    <!--    &lt;!&ndash;        <property name="repeatCount" value="0"/>&ndash;&gt;-->
+    <!--    &lt;!&ndash;    </bean>&ndash;&gt;-->
+
+    <!--        &lt;!&ndash; 按照指定规则定时执行 &ndash;&gt;-->
+    <!--        <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--            <property name="jobDetail">-->
+    <!--                <ref bean="jobDetail"/>-->
+    <!--            </property>-->
+    <!--            &lt;!&ndash; 每个5秒执行一次 &ndash;&gt;-->
+    <!--            <property name="cronExpression">-->
+    <!--                <value>0/5 * * * * ?</value>-->
+    <!--            </property>-->
+    <!--        </bean>-->
+
+    <!--        <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+    <!--            <property name="triggers">-->
+    <!--                <list>-->
+    <!--    &lt;!&ndash;                <ref bean="simpleTrigger"/>&ndash;&gt;-->
+    <!--                    <ref bean="cronTrigger"/>-->
+    <!--                </list>-->
+    <!--            </property>-->
+    <!--        </bean>-->
+</beans>

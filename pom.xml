@@ -15,9 +15,9 @@
         <spring.version>5.1.5.RELEASE</spring.version>
         <!-- mybatis版本号 -->
         <mybatis.version>3.4.6</mybatis.version>
-<!--        &lt;!&ndash; log4j日志文件管理包版本 &ndash;&gt;-->
-<!--        <slf4j.version>1.6.6</slf4j.version>-->
-<!--        <log4j.version>1.2.12</log4j.version>-->
+        <!--        &lt;!&ndash; log4j日志文件管理包版本 &ndash;&gt;-->
+        <!--        <slf4j.version>1.6.6</slf4j.version>-->
+        <!--        <log4j.version>1.2.12</log4j.version>-->
     </properties>
     <dependencies>
         <!-- spring核心包 -->
@@ -224,21 +224,21 @@
         </dependency>
         <!-- 日志文件管理包 -->
         <!-- log start -->
-<!--        <dependency>-->
-<!--            <groupId>log4j</groupId>-->
-<!--            <artifactId>log4j</artifactId>-->
-<!--            <version>${log4j.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-api</artifactId>-->
-<!--            <version>${slf4j.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-log4j12</artifactId>-->
-<!--            <version>${slf4j.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>log4j</groupId>-->
+        <!--            <artifactId>log4j</artifactId>-->
+        <!--            <version>${log4j.version}</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.slf4j</groupId>-->
+        <!--            <artifactId>slf4j-api</artifactId>-->
+        <!--            <version>${slf4j.version}</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.slf4j</groupId>-->
+        <!--            <artifactId>slf4j-log4j12</artifactId>-->
+        <!--            <version>${slf4j.version}</version>-->
+        <!--        </dependency>-->
         <!--这个依赖直接包含了 logback-core 以及 slf4j-api的依赖-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -289,7 +289,18 @@
             <artifactId>zookeeper</artifactId>
             <version>3.4.14</version>
         </dependency>
+        <!-- quartz-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.0</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>2.3.0</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>helloworld</finalName>

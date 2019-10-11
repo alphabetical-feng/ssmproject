@@ -153,7 +153,7 @@
 
     <!--对于类路径以 com.example.logback 开头的Logger,输出级别设置为warn,并且只输出到控制台-->
     <!--这个logger没有指定appender，它会继承root节点中定义的那些appender-->
-        <logger name="com.springmvc.aop" level="info"/>
+    <logger name="com.springmvc.aop" level="info"/>
 
     <!--通过 LoggerFactory.getLogger("mytest") 可以获取到这个logger-->
     <!--由于这个logger自动继承了root的appender，root中已经有stdout的appender了，自己这边又引入了stdout的appender-->
