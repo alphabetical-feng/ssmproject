@@ -309,7 +309,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>helloworld</finalName>
+        <finalName>ssmproject</finalName>
         <plugins>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>

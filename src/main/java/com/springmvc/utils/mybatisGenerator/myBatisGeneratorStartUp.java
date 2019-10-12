@@ -14,6 +14,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * mybatis逆向工程执行程序
+ */
 public class myBatisGeneratorStartUp {
     public static void main(String[] args) throws URISyntaxException {
         try {
