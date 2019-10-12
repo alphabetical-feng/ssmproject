@@ -70,10 +70,7 @@ public class LoggerAop {
      */
     @Around("controllerCut()")
     public Object around(ProceedingJoinPoint thisJoinPoint) throws Throwable {
-        long startTime = System.nanoTime();//纳秒
         Object result = thisJoinPoint.proceed();
-        long time = System.nanoTime() - startTime;
-        log.info("耗时{} ms", time / 1e6);
         return result;
     }
 

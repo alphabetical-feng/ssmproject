@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -54,16 +55,11 @@ public class TestController {
         return BeanUtil.toPagedResult(page);
     }
 
-    public static void main(String[] args) {
-
-    }
-
     @RequestMapping(value = "/insert", produces = "application/json;charset=UTF-8")
     public int insert() {
-        int k = 1;
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             Hello s = new Hello();
-            s.setName("测试" + i);
+            s.setName(UUID.randomUUID().toString().replace("-", ""));
             helloService.insert(s);
         }
         return 1;

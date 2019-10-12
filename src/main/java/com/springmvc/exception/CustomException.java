@@ -1,9 +1,13 @@
 package com.springmvc.exception;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 自定义异常
- *
  */
+@Getter
+@Setter
 public class CustomException extends RuntimeException {
 
     private static final long serialVersionUID = 4564124491192825748L;
@@ -19,11 +23,4 @@ public class CustomException extends RuntimeException {
         this.setCode(code);
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 }
