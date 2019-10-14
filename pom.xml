@@ -150,8 +150,8 @@
         <!-- servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
         <!-- json数据 spring5要使用jackson 2.9.X的版本，低于会报错版本不匹配-->

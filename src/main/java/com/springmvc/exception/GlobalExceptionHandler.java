@@ -39,6 +39,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("方法入参为：{}", JsonUtil.objectToJson(request.getParameterMap()));
         log.error("请求[{}]异常：{}", request.getRequestURI(), exception.getMessage());
         log.error("请求异常：{}", exception.getMessage());
+        log.error(exception + "");
         return new ErrorResponseEntity(exception.getCode(), "请求异常");
     }
 
@@ -58,6 +59,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         RuntimeException exception = (RuntimeException) e;
         log.error("方法入参为：{}", JsonUtil.objectToJson(request.getParameterMap()));
         log.error("请求[{}]异常：{}", request.getRequestURI(), exception.getMessage());
+        log.error(exception + "");
         return new ErrorResponseEntity(500, "请求异常");
     }
 
