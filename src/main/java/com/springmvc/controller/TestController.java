@@ -1,17 +1,16 @@
 package com.springmvc.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.springmvc.entity.Hello;
 import com.springmvc.exception.CustomException;
 import com.springmvc.service.HelloService;
-import com.springmvc.utils.BeanUtil;
 import com.springmvc.utils.JsonUtil;
+import com.springmvc.utils.PageUtil;
 import com.springmvc.utils.PagedResult;
 import com.springmvc.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,26 +37,35 @@ public class TestController {
     private RedisUtil redisUtil;
 
     @RequestMapping(value = "/hello", produces = "application/json;charset=UTF-8")
-    public CompletionStage<PagedResult> hello(String pageNo, String pageSize) {
+    public PagedResult hello(String pageNo, String pageSize) {
         Hello hello = new Hello();
-        int pageN = StringUtils.isEmpty(pageNo) ? 1 : Integer.parseInt(pageNo);
-        int pageP = StringUtils.isEmpty(pageSize) ? 20 : Integer.parseInt(pageSize);
-        PageHelper.startPage(pageN, pageP, "id desc");//关键步骤
-        log.error("当前线程为：{}", Thread.currentThread().getName());
-        List<Hello> select = helloService.select(hello);
-        String p = redisUtil.get("hello-list");
-        log.info("缓存中数据为：" + p);
+        PageUtil.startPages(pageNo, pageSize, "id desc");
+        log.info("当前线程为：{}", Thread.currentThread().getName());
+        String p = redisUtil.get(pageNo + "-" + pageSize);
+        log.error("缓存中数据为：" + p);
+        List<Hello> select = null;
         if (p == null) {
-            redisUtil.set("hello-list", JsonUtil.objectToJson(select));
-            redisUtil.expire("hello-list", 30, TimeUnit.SECONDS);
-            log.info("放入缓存成功...");
+            log.error("查询数据库");
+            select = helloService.select(hello);
+            redisUtil.setEx(pageNo + "-" + pageSize, JsonUtil.objectToJson(select), 30, TimeUnit.SECONDS);
+            log.error("放入缓存成功...");
+        } else {
+            log.error("获取缓存内容");
+            select = (List<Hello>) JsonUtil.jsonToList(p);
         }
-        log.info("哈哈");
+        PageInfo<Hello> page = null;
+        page = new PageInfo<>(select);
+        return PageUtil.toPagedResult(page);
+    }
+
+    //异步
+    @GetMapping("/callable-hello-world")
+    public CompletionStage<String> completionStage() {
+        final long startTime = System.currentTimeMillis();
+
         return CompletableFuture.supplyAsync(() -> {
-            log.error("当前线程为：{}", Thread.currentThread().getName());
-            PageInfo<Hello> page = null;
-            page = new PageInfo<>(select);
-            return BeanUtil.toPagedResult(page);
+            long costTime = System.currentTimeMillis() - startTime;
+            return "Hello,World"; // 异步执行结果
         });
     }
 
