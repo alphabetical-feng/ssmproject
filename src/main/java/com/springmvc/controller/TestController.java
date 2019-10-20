@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -36,12 +38,12 @@ public class TestController {
     private RedisUtil redisUtil;
 
     @RequestMapping(value = "/hello", produces = "application/json;charset=UTF-8")
-    public PagedResult hello(String pageNo, String pageSize) {
+    public CompletionStage<PagedResult> hello(String pageNo, String pageSize) {
         Hello hello = new Hello();
         int pageN = StringUtils.isEmpty(pageNo) ? 1 : Integer.parseInt(pageNo);
         int pageP = StringUtils.isEmpty(pageSize) ? 20 : Integer.parseInt(pageSize);
         PageHelper.startPage(pageN, pageP, "id desc");//关键步骤
-        PageInfo<Hello> page = null;
+        log.error("当前线程为：{}", Thread.currentThread().getName());
         List<Hello> select = helloService.select(hello);
         String p = redisUtil.get("hello-list");
         log.info("缓存中数据为：" + p);
@@ -50,9 +52,13 @@ public class TestController {
             redisUtil.expire("hello-list", 30, TimeUnit.SECONDS);
             log.info("放入缓存成功...");
         }
-        page = new PageInfo<Hello>(select);
         log.info("哈哈");
-        return BeanUtil.toPagedResult(page);
+        return CompletableFuture.supplyAsync(() -> {
+            log.error("当前线程为：{}", Thread.currentThread().getName());
+            PageInfo<Hello> page = null;
+            page = new PageInfo<>(select);
+            return BeanUtil.toPagedResult(page);
+        });
     }
 
     @RequestMapping(value = "/insert", produces = "application/json;charset=UTF-8")

@@ -7,6 +7,7 @@
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <async-supported>true</async-supported>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
@@ -32,6 +33,8 @@
             <param-value>classpath:spring/spring-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
+        <!--开启异步请求-->
+        <async-supported>true</async-supported>
     </servlet>
     <!-- 将前端URL请求和后台处理方法controller建立对应关系-->
     <servlet-mapping>
@@ -54,6 +57,7 @@
     <filter>
         <filter-name>contextfilter</filter-name>
         <filter-class>com.springmvc.utils.filterAndInterceptor.WebContextFilter</filter-class>
+        <async-supported>true</async-supported>
         <init-param>
             <param-name>IsCross</param-name>
             <param-value>true</param-value>
