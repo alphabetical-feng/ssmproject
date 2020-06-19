@@ -4,7 +4,7 @@
 所用技术框架功能及技术
 * 1.spring5.1.5
 * 2.mybatis3.4.6
-* 2.mysql 5.7.28
+* 3.mysql 5.7.28
 * 4.reids
 * 5.spirng-quartz，注解与xml两种配置
 * 6.集成分页插件pagehelper5.1.8
